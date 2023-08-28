@@ -1,9 +1,9 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const App = () => {
   const [news, setNews] = useState([]);
 
-  const [searchQuery, setSearchQuery] = useState('react');
+  const [searchQuery, setSearchQuery] = useState();
 
   const [url, setUrl] = useState('http://hn.algolia.com/api/v1/search?query=react');
 
@@ -33,9 +33,9 @@ const App = () => {
   const showLoading = () => (loading ? <p>Please wait...</p> : "");
 
   const showForm = () => (
-    <form style={{marginBottom:"10px"}} onSubmit={handleSubmit}>
-      <input type="text" value={searchQuery} onChange={handleChange} />
-      <button>Search</button>
+    <form className='d-flex' style={{marginBottom:"10px"}} onSubmit={handleSubmit}>
+      <input className='form-control' placeholder='Type to search news' type="text" value={searchQuery} onChange={handleChange} />
+      <button className='btn btn-primary'>Search</button>
     </form>
   );
 
@@ -49,10 +49,12 @@ const App = () => {
   );
 
   return (
-    <div style={{paddingLeft:"10px"}}>
-      <h2>News</h2>
+    <div className='container my-5' style={{paddingLeft:"10px"}}>
+      <h2>News App</h2>
       {showForm()}
-      {!loading ? showData() : showLoading()}
+      <div className="border rounded p-3">
+        {!loading ? showData() : showLoading()}
+      </div>
     </div>
   );
 };
